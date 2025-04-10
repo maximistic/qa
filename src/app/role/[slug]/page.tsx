@@ -29,7 +29,7 @@ export default async function RolePage({ params }: RolePageProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {role.questions.map((question, index) => (
+        {role.questions.map((roleQs, index) => (
           <RoleQuestionCard
           key={index}
           title={role.roleQs[index]}

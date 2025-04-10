@@ -3,6 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import Link from 'next/link';
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -98,7 +99,7 @@ export const AuthForm = ({ type }: AuthFormProps) => {
 
       {type === 'login' && (
         <div className="text-sm text-right">
-          <a href="#" className="text-indigo-600 hover:underline">Forgot Your Password?</a>
+          <Link href="/forgot-password" className="text-indigo-600 hover:underline">Forgot Your Password?</Link>
         </div>
       )}
 
@@ -111,9 +112,9 @@ export const AuthForm = ({ type }: AuthFormProps) => {
 
       <p className="text-center text-sm text-gray-500">
         {type === 'login' ? (
-          <>Don’t have an account? <a href="/signup" className="text-black font-semibold">Create New one here</a></>
+          <>Dont have an account? <Link href="/signup" className="text-black font-semibold">Create New one here</Link></>
         ) : (
-          <>Already have an account? <a href="/login" className="text-black font-semibold">Sign In</a></>
+          <>Already have an account? <Link href="/login" className="text-black font-semibold">Sign In</Link></>
         )}
       </p>
     </form>

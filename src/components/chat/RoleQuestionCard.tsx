@@ -16,7 +16,7 @@ const RoleQuestionCard: React.FC<RoleCardProps> = ({ title, description, slug })
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/role/${slug}`);
+    router.push(`/questions/${slug}`);
   };
 
   return (
