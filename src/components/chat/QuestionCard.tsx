@@ -1,16 +1,27 @@
-import { FiHelpCircle } from "react-icons/fi";
+'use client';
+
+import { Card, CardContent, CardDescription } from '@/components/ui/card';
+import { ArrowUpRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface QuestionCardProps {
   question: string;
 }
 
 export default function QuestionCard({ question }: QuestionCardProps) {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/`);
+  };
   return (
-    <div className="rounded-lg border border-gray-200 p-6">
-      <div className="flex justify-between items-start">
-        <h3 className="text-lg font-medium">{question}</h3>
-        <FiHelpCircle className="text-gray-400" />
-      </div>
-    </div>
+    <Card
+    onClick={handleClick}
+    className="cursor-pointer transition-all hover:shadow-lg hover:scale-105 border border-gray-200"
+    >
+    <CardContent>
+      <CardDescription className="text-black">{question} </CardDescription>
+      <ArrowUpRight className="h-6 w-6 text-black" />
+    </CardContent>
+    </Card>
   );
 }

@@ -7,14 +7,13 @@ import { useRouter } from 'next/navigation';
 import type { RoleSlug } from '@/lib/roles';
 
 interface RoleCardProps {
-  name: string;
+  title: string;
   description: string;
   slug: RoleSlug;
 }
 
-const RoleCard: React.FC<RoleCardProps> = ({ name, description, slug }) => {
+const RoleQuestionCard: React.FC<RoleCardProps> = ({ title, description, slug }) => {
   const router = useRouter();
-  const splitName = name.split(' ');
 
   const handleClick = () => {
     router.push(`/role/${slug}`);
@@ -26,12 +25,12 @@ const RoleCard: React.FC<RoleCardProps> = ({ name, description, slug }) => {
       className="cursor-pointer transition-all hover:shadow-lg hover:scale-105 border border-gray-200"
     >
       <CardHeader className="flex flex-row items-start justify-between pb-2">
-        <CardTitle className="text-xl font-medium text-black">
-          {splitName[0]}
-          <br />
-          {splitName.slice(1).join(" ")}
+        <CardTitle className="text-xl font-medium text-black flex-1 pr-4">
+          {title}
         </CardTitle>
-        <ArrowUpRight className="h-6 w-6 text-black" />
+        <div className="flex-shrink-0">
+          <ArrowUpRight className="h-6 w-6 text-black" style={{ minWidth: '24px', minHeight: '24px' }} />
+        </div>
       </CardHeader>
       <CardContent>
         <CardDescription className="text-black">{description}</CardDescription>
@@ -40,4 +39,4 @@ const RoleCard: React.FC<RoleCardProps> = ({ name, description, slug }) => {
   );
 };
 
-export default RoleCard;
+export default RoleQuestionCard;
