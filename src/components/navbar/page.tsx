@@ -1,13 +1,20 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter(); // ✅ for redirecting
+
   const isChatRoute = pathname.startsWith("/questions/");
+
+  const handleLogout = () => {
+    localStorage.removeItem("auth"); // ✅ remove auth
+    router.push("/login"); // ✅ redirect to login
+  };
 
   if (isChatRoute) {
     return (
@@ -15,20 +22,20 @@ export default function Navbar() {
         <div className="text-lg font-semibold text-white hidden md:flex">QUANTUM APPS</div>
 
         <div className="hidden md:flex items-center gap-4">
-            <div className="bg-white rounded-full flex items-center justify-center gap-1 px-1 py-1">
-                <Button variant="ghost" className="px-4 py-2 text-sm bg-black text-white rounded-full">
-                    General
-                </Button>
-                <Button variant="ghost" className="px-4 py-2 text-sm  ">
-                    Agent 2
-                </Button>
-                <Button variant="ghost" className="px-4 py-2 text-sm  ">
-                    Agent 3
-                </Button>
-                <Button variant="ghost" className="px-4 py-2 text-sm  ">
-                    Agent 4
-                </Button>
-            </div>
+          <div className="bg-white rounded-full flex items-center justify-center gap-1 px-1 py-1">
+            <Button variant="ghost" className="px-4 py-2 text-sm bg-black text-white rounded-full">
+              General
+            </Button>
+            <Button variant="ghost" className="px-4 py-2 text-sm">
+              Agent 2
+            </Button>
+            <Button variant="ghost" className="px-4 py-2 text-sm">
+              Agent 3
+            </Button>
+            <Button variant="ghost" className="px-4 py-2 text-sm">
+              Agent 4
+            </Button>
+          </div>
           <Input
             type="text"
             placeholder="Search"
@@ -36,7 +43,7 @@ export default function Navbar() {
           />
         </div>
 
-        <Avatar>
+        <Avatar onClick={handleLogout} className="cursor-pointer">
           <AvatarFallback>U</AvatarFallback>
         </Avatar>
       </nav>
@@ -47,7 +54,7 @@ export default function Navbar() {
   return (
     <nav className="w-full h-14 px-6 flex items-center justify-between border-b bg-black shadow-sm z-40 fixed top-0 left-0 right-0">
       <div className="text-lg font-semibold text-white">QUANTUM APPS</div>
-      <Avatar>
+      <Avatar onClick={handleLogout} className="cursor-pointer">
         <AvatarFallback>U</AvatarFallback>
       </Avatar>
     </nav>

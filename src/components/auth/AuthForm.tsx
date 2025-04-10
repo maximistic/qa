@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -29,6 +31,15 @@ interface AuthFormProps {
 
 export const AuthForm = ({ type }: AuthFormProps) => {
   const isSignup = type === 'signup';
+  const router = useRouter();
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem('auth') === 'true';
+  
+    if (isAuthenticated) {
+      router.push('/role');
+    }
+  }, []);
 
   const {
     register,
@@ -41,6 +52,8 @@ export const AuthForm = ({ type }: AuthFormProps) => {
   const onSubmit = (data: SignupFormData | LoginFormData) => {
     alert(`${type === 'login' ? 'Logged in' : 'Signed up'} successfully!`);
     console.log(data);
+    localStorage.setItem('auth', 'true');
+    router.push('/role');
   };
 
   return (
