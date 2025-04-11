@@ -7,13 +7,13 @@ import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const router = useRouter(); // ✅ for redirecting
+  const router = useRouter();
 
   const isChatRoute = pathname.startsWith("/questions/");
 
   const handleLogout = () => {
-    localStorage.removeItem("auth"); // ✅ remove auth
-    router.push("/login"); // ✅ redirect to login
+    localStorage.removeItem("auth"); 
+    router.push("/login"); 
   };
 
   if (isChatRoute) {
